@@ -12,7 +12,6 @@ export default async function (
     port: number,
     password: string,
 ): Promise<ServerRes> {
-    // debug('Sending command:', command, 'to server:', host, ':', port);
     debug(`Sending command <${command}> to server ${host}:${port}`);
 
     let rcon;
