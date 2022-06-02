@@ -1,6 +1,25 @@
 import sendCommand from './sendCommand';
 import getConfig from './getConfig';
 
+const parseList = (input: string) => {
+    // console.log(input);
+
+    const maxPlayers = Number(input.split('max of ')[1]?.split(' players')[0]);
+
+    let players: String[] = [];
+
+    const playersString = input.split('players online: ')[1];
+
+    if (playersString) {
+        players = playersString.split(', ');
+    }
+
+    return {
+        maxPlayers,
+        players,
+    };
+};
+
 export default async function (serverNum: number) {
     const config = getConfig();
 
@@ -19,15 +38,10 @@ export default async function (serverNum: number) {
         );
 
     try {
-        const players = await send('list');
-
-        const maxPlayers = await send('maxplayers');
-
         return {
-            players,
-            maxPlayers,
+            ...parseList(await send('list')),
         };
-    } catch {
-        return {offline: true};
+    } catch (err) {
+        return {offline: true, err};
     }
 }
