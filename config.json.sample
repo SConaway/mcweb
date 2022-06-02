@@ -12,7 +12,5 @@
             "name": "server 2",
             "password": "12"
         }
-    ],
-    "username": "username",
-    "password": "password"
+    ]
 }

@@ -1,9 +1,11 @@
 import sendCommand from './sendCommand';
 import getConfig from './getConfig';
 
-const parseList = (input: string) => {
-    // console.log(input);
+import _debug from 'debug';
 
+const debug = _debug('app:getServerInfo');
+
+const parseList = (input: string) => {
     const maxPlayers = Number(input.split('max of ')[1]?.split(' players')[0]);
 
     let players: String[] = [];
@@ -26,8 +28,11 @@ export default async function (serverNum: number) {
     const serverInfo = config.servers[serverNum];
 
     if (!serverInfo) {
+        debug('No server found with that number');
         throw new Error('No server found with that number');
     }
+
+    debug('Getting server info for server:', serverInfo.name);
 
     const send = async (command: string) =>
         await sendCommand(
@@ -38,8 +43,13 @@ export default async function (serverNum: number) {
         );
 
     try {
+        const list = parseList(await send('list'));
+
+        debug(`Got server info for server ${serverInfo.name}:`);
+        debug(list);
+
         return {
-            ...parseList(await send('list')),
+            ...list,
         };
     } catch (err) {
         return {offline: true, err};

@@ -20,8 +20,6 @@ router.get('/', async function (_req, res, _next) {
 
         const status = await getServerInfo(i);
 
-        console.log(status);
-
         servers.push({name: server.name, ...status});
     }
 
