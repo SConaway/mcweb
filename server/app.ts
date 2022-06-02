@@ -28,6 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/send', send);
 app.use('/list', list);
 
+app.use((_req, res, _next) => {
+    res.status(404).send("Sorry can't find that!");
+});
+
 // quit if no config file
 if (!getConfig()) {
     // print message and quit
