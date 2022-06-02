@@ -1,16 +1,6 @@
 import {Rcon as RCON} from 'rcon-client';
 
-type ServerResSuccess = {
-    res: string;
-    success: true;
-};
-
-type ServerResError = {
-    err: string;
-    success: false;
-};
-
-type ServerRes = ServerResSuccess | ServerResError;
+type ServerRes = string;
 
 export default async function (
     command: string,
@@ -30,11 +20,10 @@ export default async function (
 
         rcon.end();
 
-        return {res, success: true};
+        return res;
     } catch (err: any) {
         rcon && rcon.end();
 
-        if (err instanceof Error) return {err: err.message, success: false};
-        else return {err: err, success: false};
+        throw err;
     }
 }

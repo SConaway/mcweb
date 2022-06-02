@@ -32,14 +32,17 @@ router.get('/', async function (req, res, _next) {
         return;
     }
 
-    const serverRes = await send(
-        command,
-        serverInfo.host,
-        serverInfo.port,
-        serverInfo.password,
-    );
-
-    res.status(StatusCodes.OK).send(serverRes);
+    try {
+        const serverRes = await send(
+            command,
+            serverInfo.host,
+            serverInfo.port,
+            serverInfo.password,
+        );
+        res.status(StatusCodes.OK).send(serverRes);
+    } catch (err) {
+        res.status(StatusCodes.BAD_GATEWAY).send(String(err));
+    }
 });
 
 export default router;
