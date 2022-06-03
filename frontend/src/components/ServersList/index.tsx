@@ -10,7 +10,7 @@ export default function ServersList() {
         fetch("/list")
             .then((res) => res.json())
             .then((data) => setServers(data))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log("err", err));
     };
 
     useEffect(() => {
