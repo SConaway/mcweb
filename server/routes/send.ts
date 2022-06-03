@@ -7,7 +7,7 @@ import getConfig from '../lib/getConfig';
 
 var router = express.Router();
 
-router.get('/', async function (req, res, _next) {
+router.post('/', async function (req, res, _next) {
     const command = req.body.command as string;
     const serverNum = req.body.server as number;
 
@@ -16,7 +16,7 @@ router.get('/', async function (req, res, _next) {
         return;
     }
 
-    if (!serverNum) {
+    if (serverNum === undefined) {
         res.status(StatusCodes.BAD_REQUEST).send('No server specified');
         return;
     }

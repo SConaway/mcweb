@@ -1,13 +1,13 @@
-// import { useState } from 'react'
-// import logo from './logo.svg'
 import "./App.css";
+
+import Header from "./components/Header";
+import ServersList from "./components/ServersList";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <p>Hello Vite + React!</p>
-            </header>
+        <div className="bg-slate-50 min-h-screen">
+            <Header />
+            <ServersList />
         </div>
     );
 }
