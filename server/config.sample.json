@@ -1,10 +1,10 @@
 {
     "servers": [
         {
-            "host": "localhost",
-            "port": 8080,
+            "host": "10.0.1.176",
+            "port": 25575,
             "name": "server 1",
-            "password": "12"
+            "password": "minecraft"
         },
         {
             "host": "localhost",

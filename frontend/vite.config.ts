@@ -7,7 +7,7 @@ import { ViteTips } from "vite-plugin-tips";
 export default defineConfig({
     plugins: [
         react(), //
-        // ViteTips(),
+        ViteTips(),
     ],
     server: {
         port: 4000,
@@ -15,5 +15,9 @@ export default defineConfig({
             "/list": "http://localhost:3000",
             "/send": "http://localhost:3000",
         },
+    },
+    build: {
+        polyfillModulePreload: false,
+        sourcemap: true,
     },
 });
