@@ -3,6 +3,8 @@ import { IServer } from "../../types";
 
 import Server from "./Server";
 
+import { errorToast } from "../../utilities/errorToast";
+
 export default function ServersList() {
     const [servers, setServers] = useState<IServer[]>([]);
 
@@ -10,7 +12,10 @@ export default function ServersList() {
         fetch("/list")
             .then((res) => res.json())
             .then((data) => setServers(data))
-            .catch((err) => console.log("err", err));
+            .catch((err) => {
+                console.log("err", err);
+                errorToast(`Error fetching servers: ${err}`);
+            });
     };
 
     useEffect(() => {
@@ -18,12 +23,12 @@ export default function ServersList() {
     }, []);
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container p-4 mx-auto">
             <div
                 className={`flex justify-between items-center bg-white px-4 py-2 mx-auto mt-2 mb-4 min-h-[12vh] max-w-2xl border-2 rounded-lg`}
             >
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                     onClick={loadData}
                 >
                     Refresh
