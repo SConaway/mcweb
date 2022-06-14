@@ -10,7 +10,7 @@ export default function ServersList() {
 
     const loadData = async () => {
         try {
-            const res = await fetch("/slist");
+            const res = await fetch("/list");
 
             // check status code
             if (res.status !== 200) {
