@@ -8,14 +8,25 @@ import { errorToast } from "../../utilities/errorToast";
 export default function ServersList() {
     const [servers, setServers] = useState<IServer[]>([]);
 
-    const loadData = () => {
-        fetch("/list")
-            .then((res) => res.json())
-            .then((data) => setServers(data))
-            .catch((err) => {
-                console.log("err", err);
-                errorToast(`Error fetching servers: ${err}`);
-            });
+    const loadData = async () => {
+        try {
+            const res = await fetch("/slist");
+
+            // check status code
+            if (res.status !== 200) {
+                throw new Error("Failed to load servers");
+            }
+
+            const data = await res.json();
+            setServers(data);
+
+            //
+            // .then((res) => res.json())
+            // .then((data) => setServers(data));
+        } catch (err) {
+            console.log("err", err);
+            errorToast(`Error fetching servers: \n${err}`);
+        }
     };
 
     useEffect(() => {
