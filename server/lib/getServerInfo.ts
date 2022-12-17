@@ -1,5 +1,5 @@
-import sendCommand from './sendCommand';
-import getConfig from './getConfig';
+import sendCommand from './sendCommand.js';
+import getConfig from './getConfig.js';
 
 import _debug from 'debug';
 
@@ -12,7 +12,8 @@ const parseList = (input: string) => {
 
     const playersString = input.split('players online: ')[1];
 
-    if (playersString) {
+    // if players
+    if (playersString && playersString !== '\n') {
         players = playersString.split(', ');
     }
 
