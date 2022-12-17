@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "DEBUG='app:*' node dist/bin/www.js",
-        "build": "rm -r dist/ && mkdir dist && tsc --outDir dist",
+        "build": "tsc --outDir dist",
         "dev": "DEBUG='app:*' ts-node-dev --respawn --clear bin/www.ts"
     },
     "dependencies": {
