@@ -17,7 +17,7 @@ export default defineConfig({
         },
     },
     build: {
-        polyfillModulePreload: false,
+        // polyfillModulePreload: false,
         sourcemap: true,
     },
 });
